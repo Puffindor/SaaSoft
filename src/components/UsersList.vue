@@ -74,7 +74,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 
 .hint {
@@ -89,7 +88,6 @@ export default {
 
 .list {
   align-items: flex-start;
-  width: 1000px;
   display: flex;
   flex-direction: column;
 }
@@ -108,7 +106,6 @@ header {
 }
 
 ul {
-  // padding: 0px 20%;
   list-style: none;
   flex-direction: column;
   width: 100%;
@@ -117,6 +114,26 @@ ul {
 
   li {
     width: 100%;
+  }
+}
+
+@media screen and (max-width : 1000px) {
+
+  .table-head {
+   display: none;
+  }
+
+  .list {
+    align-items: center;
+  }
+
+  ul {
+    li {
+      margin-bottom: 20px;
+      border: 1px solid #cecfd0;
+      border-radius: 8px;
+      padding: 10px;
+    }
   }
 }
 </style>

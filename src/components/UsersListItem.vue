@@ -201,4 +201,11 @@ input.invalid {
   display: grid;
   grid-template-columns: 1fr 1fr 2fr 4%;
 }
+
+@media screen and (max-width : 1000px) {
+  .item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 </style>

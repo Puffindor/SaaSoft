@@ -27,30 +27,27 @@ export const useUsersStore = defineStore('UsersStore', {
   },
   actions: {
     //После перезагрузки достает список из localStorage
-    setUsers() {
+    setUsers(): void {
       this.users = JSON.parse(localStorage.getItem('users') || '');
     },
     //Возвращает элемент списка по id
-    findElement(id: number) {
+    findElement(id: number): listItem | undefined {
       return this.users.find((el: listItem) => el.id === id);
     },
     //Синхронизирует изменения списка с localStorage
-    setLocalStorage() {
+    setLocalStorage(): void {
       localStorage.setItem('users', JSON.stringify(this.users));
     },
     //Удаляет пользователя
-    deleteUser(id: number) {
+    deleteUser(id: number): void {
       this.users = this.users.filter((el) => el.id !== id);
       this.setLocalStorage();
     },
     //Устанавливает тип пользователя, в случае с LDAP заменяет пароль на null
-    setUserType(id: number, type: string) {
+    setUserType(id: number, type: string): void {
       const element: any = this.findElement(id);
-
       element.type = type;
-      if (type === 'LDAP') {
-        element.password = null;
-      }
+      if (type === 'LDAP') element.password = null;
       this.setLocalStorage();
     },
     //Здесь не совсем понял ТЗ, поэтому разбираю строку с метками в массив меток и убираю ";"
@@ -65,7 +62,7 @@ export const useUsersStore = defineStore('UsersStore', {
           return acc + value;
         }
         return acc;
-      }, '');
+      },'');
       this.findElement(id)!.marks = temMarks;
       this.setLocalStorage();
     },
@@ -73,7 +70,6 @@ export const useUsersStore = defineStore('UsersStore', {
     editUser(id: number, target: string, value: string): void {
       const element: any = this.findElement(id);
       element[target] = value;
-
       this.setLocalStorage();
     },
     //Добавляет нового пользователя
